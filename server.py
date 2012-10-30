@@ -107,7 +107,7 @@ def get_xyz(xyz, ip):
     client.send(greeting)
     response = client.recv(1024).strip()
     if response:
-        msg = "GIVE ME %S \n" % xyz
+        msg = "GIVE ME %s \n" % xyz
         client.send(msg)
         response = client.recv(1024).split()
         # parse the response
