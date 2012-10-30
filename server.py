@@ -1,8 +1,10 @@
 # echo server program
+import time
 import thread
 import sys
 import socket
-import zlib
+import subprocess
+import tempfile
 import pdb
 import os
 
@@ -17,7 +19,7 @@ def clientthread(conn):
     data = conn.recv(1024).strip()
     greeted, client_ip = handshake(data)
     if greeted:
-        greeting = "HELLO " + client_ip + " I'M " + my_ip + "\n"
+        greeting = "HELLO %s I'm %s \n" % (client_ip, my_ip)
         conn.sendall(greeting)
         while 1:
             # Loop while client talks to us...
@@ -43,7 +45,6 @@ def clientthread(conn):
                 db[xyz] = str(sum([int(bt) for bt in datum]))
 
                 send_checksum(xyz, db[xyz], conn)
-                # db[xyz] = zlib.crc32(datum)
 
         # Client says GET...
             elif len(words) == 4 and words[0] == 'GET' and words[2] == 'FROM':
@@ -85,7 +86,18 @@ def clientthread(conn):
         say_goodbye(conn, client_ip)
 
 def send_checksum(xyz, datum, conn):
-    reply = "%s's CHECKSUM IS %s \n" % (xyz, zlib.crc32(str(datum)))
+    (fd, filename) = tempfile.mkstemp()
+    try:
+        tfile = os.fdopen(fd, 'w')
+        tfile.write(datum)
+        tfile.close()
+        proc = subprocess.Popen(['crc32', filename], stdout=subprocess.PIPE, stderr = subprocess.PIPE)
+        time.sleep(0.2)
+        checksum = proc.stdout.read()
+        checksum.rstrip()
+    finally:
+        os.remove(filename)
+    reply = "%s's CHECKSUM IS %s \n" % (xyz, checksum)
     conn.sendall(reply)
 
 def get_xyz(xyz, ip):
@@ -94,12 +106,12 @@ def get_xyz(xyz, ip):
     datum = ''
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((ip, 8080))
-    greeting = "HELLO " + ip + " I'M " + my_ip + "\n"
+    greeting = "HELLO %s I'M %s \n" % (ip, my_ip)
     client.send(greeting)
     response = s.recv(1024)
     responded, their_ip = handshake(response)
     if responded:
-        msg = "GIVE ME " + xyz + " \n"
+        msg = "GIVE ME %S \N" % xyz
         client.send(msg)
         response = s.recv(1024).split()
         # parse the response
