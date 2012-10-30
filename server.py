@@ -130,7 +130,6 @@ def mean_goodbye(conn):
 
 def handshake(msg):
     words = msg.split()
-    print 'Handshake: %s' % words
     try:
         ip = words[2]
         socket.inet_aton(ip)
