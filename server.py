@@ -105,12 +105,11 @@ def get_xyz(xyz, ip):
     client.connect((ip, 8080))
     greeting = "HELLO I'M %s \n" % my_ip
     client.send(greeting)
-    response = s.recv(1024)
-    responded, their_ip = handshake(response)
-    if responded:
+    response = client.recv(1024).strip()
+    if response is not null:
         msg = "GIVE ME %S \n" % xyz
         client.send(msg)
-        response = s.recv(1024).split()
+        response = client.recv(1024).split()
         # parse the response
         their_xyz = int(response[0])
         if their_xyz == xyz:
