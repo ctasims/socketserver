@@ -11,7 +11,6 @@ import os
 HOST = ''
 PORT = 8080
 db = {}
-my_ip = '10.23.1.2'
 
 # Function for handling connections. Used to create threads.
 def clientthread(conn):
@@ -19,7 +18,7 @@ def clientthread(conn):
     data = conn.recv(1024).strip()
     greeted, client_ip = handshake(data)
     if greeted:
-        greeting = "HELLO %s I'm %s \n" % (client_ip, my_ip)
+        greeting = "HELLO %s I'M %s \n" % (client_ip, my_ip)
         conn.sendall(greeting)
         while 1:
             # Loop while client talks to us...
@@ -102,10 +101,9 @@ def get_xyz(xyz, ip):
     """
     """
     datum = ''
-    pdb.set_trace()
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((ip, 8080))
-    greeting = "HELLO %s I'M %s \n" % (ip, my_ip)
+    greeting = "HELLO I'M %s \n" % my_ip
     client.send(greeting)
     response = s.recv(1024)
     responded, their_ip = handshake(response)
@@ -156,6 +154,8 @@ try:
 except socket.error, msg:
     print 'Bind failed.'
     sys.exit()
+
+my_ip = socket.gethostbyname(socket.gethostname())
 
 s.listen(10)
 print 'Socket listening'
