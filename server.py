@@ -16,13 +16,20 @@ db = {}
 def clientthread(conn):
     #conn.send('Welcome to the server. Type something and hit enter\n')
     data = conn.recv(1024).strip()
+    if data == '':
+        conn.close()
+        return
     greeted, client_ip = handshake(data)
     if greeted:
         greeting = "HELLO %s I'M %s \n" % (client_ip, my_ip)
         conn.sendall(greeting)
         while 1:
             # Loop while client talks to us...
-            data = conn.recv(1024).strip()
+            data = conn.recv(1024).rstrip()
+            if data == '':
+                conn.close()
+                return
+            print data
             words = data.split()
 
             # Client says GENERATE...
@@ -77,10 +84,12 @@ def clientthread(conn):
                 # if request is malformed
             else:
                 say_goodbye(conn, client_ip)
+                return
 
     else:
         print 'No greeting'
         say_goodbye(conn, client_ip)
+        return
 
 def send_checksum(xyz, datum, conn):
     (fd, filename) = tempfile.mkstemp()
@@ -91,7 +100,8 @@ def send_checksum(xyz, datum, conn):
         proc = subprocess.Popen(['crc32', filename], stdout=subprocess.PIPE, stderr = subprocess.PIPE)
         time.sleep(0.2)
         checksum = proc.stdout.read()
-        checksum.rstrip()
+        checksum.rstrip('\n')
+        checksum = int(checksum, 16)
     finally:
         os.remove(filename)
     reply = "%s's CHECKSUM IS %s \n" % (xyz, checksum)
@@ -122,6 +132,7 @@ def say_goodbye(conn, their_ip):
     msg = "GOODBYE %s \n" % their_ip
     conn.send(msg)
     conn.close()
+    return
 
 def mean_goodbye(conn):
     msg = "ARE YOU FEELING LUCKY, PUNK? \n"
