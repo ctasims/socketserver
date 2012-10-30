@@ -6,7 +6,6 @@ import zlib
 import pdb
 import os
 
-# test
 HOST = ''
 PORT = 8080
 db = {}
@@ -27,7 +26,7 @@ def clientthread(conn):
 
             # Client says GENERATE...
             if len(words) == 5 and words[0] == 'GENERATE' and words[2] == 'BYTES' and words[3] == 'CALLED':
-                byte_len = words[1]
+                byte_len = int(words[1])
                 xyz = int(words[4])
                 # calc the datum to store
                 # xyz int is comprised of four bytes
@@ -36,20 +35,19 @@ def clientthread(conn):
                 xyz_bytes[1] = (xyz & 0x00ff0000) >> 16
                 xyz_bytes[2] = (xyz & 0x0000ff00) >> 8
                 xyz_bytes[3] = (xyz & 0x000000ff)
-                datum = 0
+                datum = bytearray()
+                datum.append('\x00')
                 for num in range(byte_len):
                     index = num % 4
                     datum.append(xyz_bytes[index])
-                db[xyz] = datum.decode('utf-8')
+                db[xyz] = str(sum([int(bt) for bt in datum]))
 
-                #datum = ' * byte_len
-                db[xyz] = datum
-                send_checksum(datum, conn)
+                send_checksum(xyz, db[xyz], conn)
                 # db[xyz] = zlib.crc32(datum)
 
         # Client says GET...
             elif len(words) == 4 and words[0] == 'GET' and words[2] == 'FROM':
-                xyz = words[1]
+                xyz = int(words[1])
                 get_ip = words[3]
                 try:
                     socket.inet_aton(get_ip)
@@ -59,13 +57,13 @@ def clientthread(conn):
 
                 their_datum = get_xyz(xyz, get_ip)
                 if datum:
-                    send_checksum(their_datum, conn)
+                    send_checksum(xyz, their_datum, conn)
                 else:
                     say_goodbye(conn, client_ip)
 
             # Client says GIVE ME
             elif len(words) == 3 and words[0] == 'GIVE' and words[1] == 'ME':
-                xyz = words[2]
+                xyz = int(words[2])
                 try:
                     reply = "%s is %s \n" % (xyz, db[xyz])
                     conn.sendall(reply)
@@ -84,21 +82,14 @@ def clientthread(conn):
 
     else:
         print 'No greeting'
-        print data
-        conn.close()
+        say_goodbye(conn, client_ip)
 
-def send_checksum(datum, conn):
-    reply = xyz + "'s CHECKSUM IS " + zlib.crc32(datum) + '\n'
+def send_checksum(xyz, datum, conn):
+    reply = "%s's CHECKSUM IS %s \n" % (xyz, zlib.crc32(str(datum)))
     conn.sendall(reply)
 
 def get_xyz(xyz, ip):
     """
-    connect to client
-    say hello
-    wait for them to say hello
-    send request "GIVE ME..."
-    receive response
-    say goodbye
     """
     datum = ''
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -132,10 +123,12 @@ def handshake(msg):
         socket.inet_aton(ip)
         if words[0] == 'HELLO' and words[1] == "I'M":
             return True, ip
+        else:
+            return False, ''
     except socket.error:
-        return False, 0
+        return False, ''
     except IndexError:
-        return False, 0
+        return False, ''
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -160,5 +153,6 @@ while 1:
     # start new threads takes 1st arg as function name to be run, second is tuple of args to function
     thread.start_new_thread(clientthread, (conn,))
 
+s.shutdown()
 s.close()
 
