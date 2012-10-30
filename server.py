@@ -53,11 +53,11 @@ def clientthread(conn):
                 try:
                     socket.inet_aton(get_ip)
                 except socket.error:
-                    mean_goodbye()
-                # ip is legit
+                    mean_goodbye(conn)
 
+                # ip is legit
                 their_datum = get_xyz(xyz, get_ip)
-                if datum:
+                if their_datum:
                     send_checksum(xyz, their_datum, conn)
                 else:
                     say_goodbye(conn, client_ip)
@@ -69,9 +69,7 @@ def clientthread(conn):
                     reply = "%s is %s \n" % (xyz, db[xyz])
                     conn.sendall(reply)
                 except KeyError:
-                    punk_msg = "ARE YOU FEELING LUCKY, PUNK? \n"
-                    conn.send(punk_msg)
-                    say_goodbye(conn, client_ip)
+                    mean_goodbye(conn)
 
                 # Client says GOODBYE
             elif len(words) == 2:
@@ -104,6 +102,7 @@ def get_xyz(xyz, ip):
     """
     """
     datum = ''
+    pdb.set_trace()
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((ip, 8080))
     greeting = "HELLO %s I'M %s \n" % (ip, my_ip)
@@ -111,11 +110,12 @@ def get_xyz(xyz, ip):
     response = s.recv(1024)
     responded, their_ip = handshake(response)
     if responded:
-        msg = "GIVE ME %S \N" % xyz
+        msg = "GIVE ME %S \n" % xyz
         client.send(msg)
         response = s.recv(1024).split()
         # parse the response
-        if response[0] == xyz:
+        their_xyz = int(response[0])
+        if their_xyz == xyz:
             datum = response[2]
         say_goodbye(client, ip)
     return datum
@@ -126,6 +126,10 @@ def say_goodbye(conn, their_ip):
     conn.send(msg)
     conn.close()
 
+def mean_goodbye(conn):
+    msg = "ARE YOU FEELING LUCKY, PUNK? \n"
+    conn.send(msg)
+    conn.close()
 
 def handshake(msg):
     words = msg.split()
