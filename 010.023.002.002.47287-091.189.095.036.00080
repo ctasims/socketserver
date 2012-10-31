@@ -1,0 +1,9 @@
+GET /meta-release-lts HTTP/1.1
+Accept-Encoding: identity
+If-Modified-Since: Thu Sep 13 14:35:15 2012
+Host: changelogs.ubuntu.com
+User-Agent: Python-urllib/2.7
+Connection: close
+Pragma: no-cache
+Cache-Control: No-Cache
+
