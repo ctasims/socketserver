@@ -1,4 +1,14 @@
-# echo server program
+"""
+Socket server for CS 485/585
+Cianan Sims and Jason Rose
+
+Server spawns new threads for incoming connects.
+Maintains generated data in hashmap (dict)
+
+Run server by typing 'python server.py' at bash
+
+"""
+
 import time
 import thread
 import sys
@@ -16,11 +26,12 @@ db = {}
 def clientthread(conn):
     #conn.send('Welcome to the server. Type something and hit enter\n')
     data = conn.recv(1024).strip()
-    if data == '':
+    if data == '':  # if they send nothing, close out
         conn.close()
         return
     greeted, client_ip = handshake(data)
     if greeted:
+        # only accept more commands if they have manners!
         greeting = "HELLO %s I'M %s \n" % (client_ip, my_ip)
         conn.sendall(greeting)
         while 1:
@@ -38,6 +49,8 @@ def clientthread(conn):
                 xyz = int(words[4])
                 # calc the datum to store
                 # xyz int is comprised of four bytes
+                # get datum by repeating those four bytes and then summing them
+                # not totally unique, but it'll work
                 xyz_bytes = {}
                 xyz_bytes[0] = (xyz & 0xff000000) >> 24
                 xyz_bytes[1] = (xyz & 0x00ff0000) >> 16
@@ -52,12 +65,12 @@ def clientthread(conn):
 
                 send_checksum(xyz, db[xyz], conn)
 
-        # Client says GET...
+            # Client says GET...
             elif len(words) == 4 and words[0] == 'GET' and words[2] == 'FROM':
                 xyz = int(words[1])
                 get_ip = words[3]
                 try:
-                    socket.inet_aton(get_ip)
+                    socket.inet_aton(get_ip)  # check that their ip is legit
                 except socket.error:
                     mean_goodbye(conn)
 
@@ -77,12 +90,12 @@ def clientthread(conn):
                 except KeyError:
                     mean_goodbye(conn)
 
-                # Client says GOODBYE
+            # Client says GOODBYE
             elif len(words) == 2:
                 say_goodbye(conn, client_ip)
                 return
 
-                # if request is malformed
+            # if request is malformed
             else:
                 say_goodbye(conn, client_ip)
                 return
@@ -93,7 +106,11 @@ def clientthread(conn):
         return
 
 def send_checksum(xyz, datum, conn):
-    (fd, filename) = tempfile.mkstemp()
+    """ generate the crc32 checksum of the datum and send it through the given
+    connection
+
+    """
+    (fd, filename) = tempfile.mkstemp()  # use tempfile to store datum
     try:
         tfile = os.fdopen(fd, 'w')
         tfile.write(datum)
@@ -109,7 +126,9 @@ def send_checksum(xyz, datum, conn):
     conn.sendall(reply)
 
 def get_xyz(xyz, ip):
-    """
+    """ If client asks us to GET data from someone else, open a connection to
+    the other server, greet them, and say GIVE ME XYZ
+
     """
     datum = ''
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -142,6 +161,9 @@ def mean_goodbye(conn):
     return
 
 def handshake(msg):
+    """ Check that client greets us courteously.
+
+    """
     words = msg.split()
     try:
         ip = words[2]
@@ -156,6 +178,9 @@ def handshake(msg):
         return False, ''
 
 
+""" ACTIVATE SERVER
+create server socket and bind to it
+"""
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'
 
@@ -168,7 +193,7 @@ except socket.error, msg:
 
 my_ip = socket.gethostbyname(socket.gethostname())
 
-s.listen(10)
+s.listen(10)  # queue up to 10 connections
 print 'Socket listening'
 
 # Accept client connections
