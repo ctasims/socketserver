@@ -80,6 +80,7 @@ def clientthread(conn):
                 # Client says GOODBYE
             elif len(words) == 2:
                 say_goodbye(conn, client_ip)
+                return
 
                 # if request is malformed
             else:
@@ -138,6 +139,7 @@ def mean_goodbye(conn):
     msg = "ARE YOU FEELING LUCKY, PUNK? \n"
     conn.send(msg)
     conn.close()
+    return
 
 def handshake(msg):
     words = msg.split()
