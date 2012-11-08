@@ -1,0 +1,434 @@
+====== Group Member 10a Neighbors on VPN 8 =====
+	Group 20
+	Group 23
+	Group 27
+	Group 30
+
+
+====== Group Member 10b Neighbors on VPN 14 =====
+	Group 8
+	Group 16
+	Group 21
+	Group 25
+
+
+====== Group Member 11a Neighbors on VPN 10 =====
+	Group 17
+	Group 19
+	Group 26
+	Group 28
+
+
+====== Group Member 11b Neighbors on VPN 13 =====
+	Group 2
+	Group 5
+	Group 32
+
+
+====== Group Member 12a Neighbors on VPN 1 =====
+	Group 24
+	Group 29
+	Group 31
+
+
+====== Group Member 12b Neighbors on VPN 12 =====
+	Group 13
+	Group 14
+	Group 16
+	Group 20
+
+
+====== Group Member 13a Neighbors on VPN 12 =====
+	Group 12
+	Group 14
+	Group 16
+	Group 20
+
+
+====== Group Member 13b Neighbors on VPN 9 =====
+	Group 9
+	Group 9
+	Group 14
+	Group 17
+
+
+====== Group Member 14a Neighbors on VPN 9 =====
+	Group 9
+	Group 9
+	Group 13
+	Group 17
+
+
+====== Group Member 14b Neighbors on VPN 12 =====
+	Group 12
+	Group 13
+	Group 16
+	Group 20
+
+
+====== Group Member 15a Neighbors on VPN 2 =====
+	Group 3
+	Group 4
+	Group 6
+	Group 31
+
+
+====== Group Member 15b Neighbors on VPN 6 =====
+	Group 5
+	Group 28
+
+
+====== Group Member 16a Neighbors on VPN 12 =====
+	Group 12
+	Group 13
+	Group 14
+	Group 20
+
+
+====== Group Member 16b Neighbors on VPN 14 =====
+	Group 8
+	Group 10
+	Group 21
+	Group 25
+
+
+====== Group Member 17a Neighbors on VPN 9 =====
+	Group 9
+	Group 9
+	Group 13
+	Group 14
+
+
+====== Group Member 17b Neighbors on VPN 10 =====
+	Group 11
+	Group 19
+	Group 26
+	Group 28
+
+
+====== Group Member 18a Neighbors on VPN 4 =====
+	Group 29
+
+
+====== Group Member 18b Neighbors on VPN 7 =====
+	Group 3
+	Group 21
+	Group 22
+	Group 23
+	Group 24
+
+
+====== Group Member 19a Neighbors on VPN 10 =====
+	Group 11
+	Group 17
+	Group 26
+	Group 28
+
+
+====== Group Member 19b Neighbors on VPN 11 =====
+	Group 1
+	Group 7
+	Group 30
+	Group 32
+
+
+====== Group Member 1a Neighbors on VPN 3 =====
+	Group 2
+	Group 4
+	Group 8
+	Group 22
+
+
+====== Group Member 1b Neighbors on VPN 11 =====
+	Group 7
+	Group 19
+	Group 30
+	Group 32
+
+
+====== Group Member 20a Neighbors on VPN 8 =====
+	Group 10
+	Group 23
+	Group 27
+	Group 30
+
+
+====== Group Member 20b Neighbors on VPN 12 =====
+	Group 12
+	Group 13
+	Group 14
+	Group 16
+
+
+====== Group Member 21a Neighbors on VPN 7 =====
+	Group 3
+	Group 18
+	Group 22
+	Group 23
+	Group 24
+
+
+====== Group Member 21b Neighbors on VPN 14 =====
+	Group 8
+	Group 10
+	Group 16
+	Group 25
+
+
+====== Group Member 22a Neighbors on VPN 3 =====
+	Group 1
+	Group 2
+	Group 4
+	Group 8
+
+
+====== Group Member 22b Neighbors on VPN 7 =====
+	Group 3
+	Group 18
+	Group 21
+	Group 23
+	Group 24
+
+
+====== Group Member 23a Neighbors on VPN 7 =====
+	Group 3
+	Group 18
+	Group 21
+	Group 22
+	Group 24
+
+
+====== Group Member 23b Neighbors on VPN 8 =====
+	Group 10
+	Group 20
+	Group 27
+	Group 30
+
+
+====== Group Member 24a Neighbors on VPN 1 =====
+	Group 12
+	Group 29
+	Group 31
+
+
+====== Group Member 24b Neighbors on VPN 7 =====
+	Group 3
+	Group 18
+	Group 21
+	Group 22
+	Group 23
+
+
+====== Group Member 25a Neighbors on VPN 5 =====
+	Group 6
+	Group 7
+	Group 26
+	Group 27
+
+
+====== Group Member 25b Neighbors on VPN 14 =====
+	Group 8
+	Group 10
+	Group 16
+	Group 21
+
+
+====== Group Member 26a Neighbors on VPN 5 =====
+	Group 6
+	Group 7
+	Group 25
+	Group 27
+
+
+====== Group Member 26b Neighbors on VPN 10 =====
+	Group 11
+	Group 17
+	Group 19
+	Group 28
+
+
+====== Group Member 27a Neighbors on VPN 5 =====
+	Group 6
+	Group 7
+	Group 25
+	Group 26
+
+
+====== Group Member 27b Neighbors on VPN 8 =====
+	Group 10
+	Group 20
+	Group 23
+	Group 30
+
+
+====== Group Member 28a Neighbors on VPN 6 =====
+	Group 5
+	Group 15
+
+
+====== Group Member 28b Neighbors on VPN 10 =====
+	Group 11
+	Group 17
+	Group 19
+	Group 26
+
+
+====== Group Member 29a Neighbors on VPN 1 =====
+	Group 12
+	Group 24
+	Group 31
+
+
+====== Group Member 29b Neighbors on VPN 4 =====
+	Group 18
+
+
+====== Group Member 2a Neighbors on VPN 3 =====
+	Group 1
+	Group 4
+	Group 8
+	Group 22
+
+
+====== Group Member 2b Neighbors on VPN 13 =====
+	Group 5
+	Group 11
+	Group 32
+
+
+====== Group Member 30a Neighbors on VPN 8 =====
+	Group 10
+	Group 20
+	Group 23
+	Group 27
+
+
+====== Group Member 30b Neighbors on VPN 11 =====
+	Group 1
+	Group 7
+	Group 19
+	Group 32
+
+
+====== Group Member 31a Neighbors on VPN 1 =====
+	Group 12
+	Group 24
+	Group 29
+
+
+====== Group Member 31b Neighbors on VPN 2 =====
+	Group 3
+	Group 4
+	Group 6
+	Group 15
+
+
+====== Group Member 32a Neighbors on VPN 11 =====
+	Group 1
+	Group 7
+	Group 19
+	Group 30
+
+
+====== Group Member 32b Neighbors on VPN 13 =====
+	Group 2
+	Group 5
+	Group 11
+
+
+====== Group Member 3a Neighbors on VPN 2 =====
+	Group 4
+	Group 6
+	Group 15
+	Group 31
+
+
+====== Group Member 3b Neighbors on VPN 7 =====
+	Group 18
+	Group 21
+	Group 22
+	Group 23
+	Group 24
+
+
+====== Group Member 4a Neighbors on VPN 2 =====
+	Group 3
+	Group 6
+	Group 15
+	Group 31
+
+
+====== Group Member 4b Neighbors on VPN 3 =====
+	Group 1
+	Group 2
+	Group 8
+	Group 22
+
+
+====== Group Member 5a Neighbors on VPN 13 =====
+	Group 2
+	Group 11
+	Group 32
+
+
+====== Group Member 5b Neighbors on VPN 6 =====
+	Group 15
+	Group 28
+
+
+====== Group Member 6a Neighbors on VPN 2 =====
+	Group 3
+	Group 4
+	Group 15
+	Group 31
+
+
+====== Group Member 6b Neighbors on VPN 5 =====
+	Group 7
+	Group 25
+	Group 26
+	Group 27
+
+
+====== Group Member 7a Neighbors on VPN 5 =====
+	Group 6
+	Group 25
+	Group 26
+	Group 27
+
+
+====== Group Member 7b Neighbors on VPN 11 =====
+	Group 1
+	Group 19
+	Group 30
+	Group 32
+
+
+====== Group Member 8a Neighbors on VPN 3 =====
+	Group 1
+	Group 2
+	Group 4
+	Group 22
+
+
+====== Group Member 8b Neighbors on VPN 14 =====
+	Group 10
+	Group 16
+	Group 21
+	Group 25
+
+
+====== Group Member 9a Neighbors on VPN 9 =====
+	Group 9
+	Group 13
+	Group 14
+	Group 17
+
+
+====== Group Member 9b Neighbors on VPN 9 =====
+	Group 9
+	Group 13
+	Group 14
+	Group 17
+
+
