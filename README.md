@@ -1,6 +1,6 @@
 socketserver
 ============
-Cianan Sims and Jason Rose
+Cianan Sims and Jason Rose\n
 CS 585
 2012 Fall
 
